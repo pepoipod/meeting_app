@@ -1,0 +1,2 @@
+module UsersMeetingsHelper
+end
