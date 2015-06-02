@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601163830) do
+ActiveRecord::Schema.define(version: 20150601170955) do
 
   create_table "meetings", force: :cascade do |t|
     t.datetime "start_datetime"
@@ -52,5 +52,15 @@ ActiveRecord::Schema.define(version: 20150601163830) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["username"], name: "index_users_on_username", unique: true
+
+  create_table "users_meetings", force: :cascade do |t|
+    t.integer  "user_id_id"
+    t.integer  "meeting_id_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "users_meetings", ["meeting_id_id"], name: "index_users_meetings_on_meeting_id_id"
+  add_index "users_meetings", ["user_id_id"], name: "index_users_meetings_on_user_id_id"
 
 end

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  root 'topics#index'
+
+  resources :users_meetings
   resources :meetings
   resources :topics
   devise_for :users, :controllers => {
