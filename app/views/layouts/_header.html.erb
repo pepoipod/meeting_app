@@ -2,7 +2,7 @@
 	<h1>MeetingApp</h1>
 	<nav class="g-nav">
 		<ul>
-			<li><%= link_to "Topic", root_path%></li>
+			<li><%= link_to "Topic", '/topics'%></li>
 			<li><%= link_to "Meeting", '/meetings'%></li>
 			<% if current_user %>
 				<li><%= link_to "Sign out", '/users/sign_out'%></li>
@@ -12,6 +12,6 @@
 		</ul>
 	</nav>
 	<% if current_user %>
-		<p><%= link_to "User: #{current_user.username}", '/users/show' %></p>
+		<p><%= "User: #{current_user.username}" %></p>
 	<% end %>
 </header>
