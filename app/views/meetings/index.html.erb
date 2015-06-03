@@ -14,6 +14,7 @@
   <tbody>
     <% @meetings.each do |meeting| %>
       <tr>
+        <td><%= meeting.title %></td>
         <td><%= meeting.start_datetime %></td>
         <td><%= meeting.finished_flg %></td>
         <td><%= link_to 'Show', meeting %></td>
