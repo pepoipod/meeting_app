@@ -1,0 +1,13 @@
+<h1>Profile</h1>
+<h2><%= "name: #{current_user.username}" %></h2>
+
+<h2>User's Topics</h2>
+<ul>
+<% @topics.each do |t| %>
+	<li>
+		<h3><%= "Title: #{t.title} ##{t.id}" %></h3>
+		<p><%= "#{t.body}" %></p>
+		<time><%= "created_at: #{t.created_at}" %></time>
+	</li>
+<% end %>
+</ul>
