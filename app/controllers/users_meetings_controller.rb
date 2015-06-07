@@ -69,6 +69,6 @@ class UsersMeetingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def users_meeting_params
-      params.require(:users_meeting).permit(:user_id_id, :meeting_id_id)
+      params.require(:users_meeting).permit(:user_id_id, :meeting_id_id, :attendance_flg)
     end
 end

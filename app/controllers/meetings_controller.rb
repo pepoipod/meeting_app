@@ -1,5 +1,5 @@
 class MeetingsController < ApplicationController
-  before_action :set_meeting, only: [:show, :edit, :update, :destroy]
+  before_action :set_meeting, only: [:show, :edit, :update, :destroy, :attendance, :absence]
 
   # GET /meetings
   # GET /meetings.json
@@ -10,10 +10,12 @@ class MeetingsController < ApplicationController
   # GET /meetings/1
   # GET /meetings/1.json
   def show
+    @users_meetings = UsersMeeting.where(meeting_id_id: @meeting.id)
   end
 
   # GET /meetings/new
   def new
+    printf("hoge")
     @meeting = Meeting.new
   end
 
@@ -48,6 +50,44 @@ class MeetingsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @meeting.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def attendance
+    if users_meeting = UsersMeeting.find_by(user_id_id: current_user.id, meeting_id_id: @meeting.id)
+      users_meeting.attendance_flg = true
+    else
+      users_meeting = UsersMeeting.new(
+        user_id_id: current_user.id,
+        meeting_id_id: @meeting.id,
+        attendance_flg: true
+      )
+    end
+
+    if users_meeting.save
+      redirect_to @meeting
+    else
+      format.html { render :new }
+      format.json { render json: @users_meeting.errors, status: :unprocessable_entity }
+    end
+  end
+
+  def absence
+    if users_meeting = UsersMeeting.find_by(user_id_id: current_user.id, meeting_id_id: @meeting.id)
+      users_meeting.attendance_flg = false
+    else
+      users_meeting = UsersMeeting.new(
+        user_id_id: current_user.id,
+        meeting_id_id: @meeting.id,
+        attendance_flg: false
+      )
+    end
+
+    if users_meeting.save
+      redirect_to @meeting
+    else
+      format.html { render :new }
+      format.json { render json: @users_meeting.errors, status: :unprocessable_entity }
     end
   end
 

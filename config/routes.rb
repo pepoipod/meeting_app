@@ -7,7 +7,13 @@ Rails.application.routes.draw do
   root 'topics#index'
 
   resources :users_meetings
-  resources :meetings
+
+  resources :meetings do
+    member do
+      get :attendance
+      get :absence
+    end
+  end
   resources :topics
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
