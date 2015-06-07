@@ -1,13 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Meetings</h1>
+<h1>Open Meetings</h1>
 
 <table>
   <thead>
     <tr>
+      <th>Title</th>
       <th>Start datetime</th>
       <th>Finished flg</th>
-      <th colspan="3"></th>
+      <th>Attendance flg</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -17,9 +19,15 @@
         <td><%= meeting.title %></td>
         <td><%= meeting.start_datetime %></td>
         <td><%= meeting.finished_flg %></td>
+        <td>
+          <% users_meeting = UsersMeeting.find_by(user_id_id: current_user.id, meeting_id_id: meeting.id) %>
+          <%= users_meeting.attendance_flg %>
+        </td>
         <td><%= link_to 'Show', meeting %></td>
         <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
         <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Attendance', attendance_meeting_path(meeting), data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Absence', absence_meeting_path(meeting), data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

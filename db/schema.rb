@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150603074400) do
+ActiveRecord::Schema.define(version: 20150603084915) do
 
   create_table "meetings", force: :cascade do |t|
     t.datetime "start_datetime"
@@ -57,8 +57,9 @@ ActiveRecord::Schema.define(version: 20150603074400) do
   create_table "users_meetings", force: :cascade do |t|
     t.integer  "user_id_id"
     t.integer  "meeting_id_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.boolean  "attendance_flg"
   end
 
   add_index "users_meetings", ["meeting_id_id"], name: "index_users_meetings_on_meeting_id_id"
