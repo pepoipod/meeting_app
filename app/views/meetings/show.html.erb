@@ -17,21 +17,32 @@
 
 <p>
   <strong>My Attendance flg:</strong>
-  <% users_meeting = UsersMeeting.find_by(user_id_id: current_user.id, meeting_id_id: @meeting.id) %>
-  <%= users_meeting.attendance_flg %>
+  <% if users_meeting = UsersMeeting.find_by(user_id_id: current_user.id, meeting_id_id: @meeting.id) %>
+  	<%= users_meeting.attendance_flg %>
+  <% end %>
 </p>
 
 <strong>AttendeeList</strong>
 <ul>
 	<% @users_meetings.where(attendance_flg: true).each do |users_meeting| %>
-		<%= User.find(users_meeting.user_id_id).username %>
+		<li><%= User.find(users_meeting.user_id_id).username %></li>
 	<% end %>
 </ul>
 
 <strong>AbsenteeList</strong>
 <ul>
 	<% @users_meetings.where(attendance_flg: false).each do |users_meeting| %>
-		<%= User.find(users_meeting.user_id_id).username %>
+		<li><%= User.find(users_meeting.user_id_id).username %></li>
+	<% end %>
+</ul>
+
+<strong>UndecidedList</strong>
+<ul>
+	<% User.all.each do |user| %>
+		<% users_meeting = @users_meetings.find_by(user_id_id: user.id) %>
+		<% if !users_meeting || users_meeting.attendance_flg = nil %>
+			<li><%= user.username %></li>
+		<% end %>
 	<% end %>
 </ul>
 
