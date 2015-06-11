@@ -11,6 +11,11 @@
 </p>
 
 <p>
+  <strong>Summary:</strong>
+  <%= simple_format(@meeting.summary) %>
+</p>
+
+<p>
   <strong>Finished flg:</strong>
   <%= @meeting.finished_flg %>
 </p>
@@ -22,21 +27,21 @@
   <% end %>
 </p>
 
-<strong>AttendeeList</strong>
+<strong>AttendeeList:</strong>
 <ul>
 	<% @users_meetings.where(attendance_flg: true).each do |users_meeting| %>
 		<li><%= User.find(users_meeting.user_id_id).username %></li>
 	<% end %>
 </ul>
 
-<strong>AbsenteeList</strong>
+<strong>AbsenteeList:</strong>
 <ul>
 	<% @users_meetings.where(attendance_flg: false).each do |users_meeting| %>
 		<li><%= User.find(users_meeting.user_id_id).username %></li>
 	<% end %>
 </ul>
 
-<strong>UndecidedList</strong>
+<strong>UndecidedList:</strong>
 <ul>
 	<% User.all.each do |user| %>
 		<% users_meeting = @users_meetings.find_by(user_id_id: user.id) %>
