@@ -12,7 +12,7 @@
 
 <p>
   <strong>Summary:</strong>
-  <%= simple_format(@meeting.summary) %>
+  <%= simple_format(replaceNumToTopic(String(@meeting.summary)).html_safe) %>
 </p>
 
 <p>
@@ -58,3 +58,13 @@
 
 <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
 <%= link_to 'Back', meetings_path %>
+
+<!-- jqueryの機能を使ってチェックボックスの制御を行う -->
+<script type="text/javascript">
+	$(function () {
+		$("input[type=checkbox]").click(function () {
+			$.post('/topics/' + $(this).val() + '/toggle')
+			//alert($(this).val());
+		})
+	})
+</script>

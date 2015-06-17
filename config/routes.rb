@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :meetings_topics
   get 'users/index'
 
   get 'users/show'
@@ -7,6 +8,12 @@ Rails.application.routes.draw do
   root 'topics#index'
 
   resources :users_meetings
+
+  resources :topics do
+    member do
+      post :toggle
+    end
+  end
 
   resources :meetings do
     member do

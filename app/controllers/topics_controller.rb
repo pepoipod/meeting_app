@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  before_action :set_topic, only: [:show, :edit, :update, :destroy]
+  before_action :set_topic, only: [:show, :edit, :update, :destroy, :toggle]
 
   # GET /topics
   # GET /topics.json
@@ -60,6 +60,16 @@ class TopicsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to topics_url, notice: 'Topic was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def toggle
+    @topic.finished_flg = !@topic.finished_flg
+    if @topic.save
+      redirect_to @topic
+    else
+      format.html { render :edit }
+      format.json { render json: @topic.errors, status: :unprocessable_entity }
     end
   end
 
