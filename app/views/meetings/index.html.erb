@@ -7,9 +7,10 @@
     <tr>
       <th>Title</th>
       <th>Start datetime</th>
+      <th>Summary</th>
       <th>Finished flg</th>
       <th>Attendance flg</th>
-      <th colspan="4"></th>
+      <th colspan="5"></th>
     </tr>
   </thead>
 
@@ -18,6 +19,7 @@
       <tr>
         <td><%= meeting.title %></td>
         <td><%= meeting.start_datetime %></td>
+        <td><%= simple_format(replaceNumToTopic(String(meeting.summary)).html_safe) %></td>
         <td><%= meeting.finished_flg %></td>
         <td>
           <% if users_meeting = UsersMeeting.find_by(user_id_id: current_user.id, meeting_id_id: meeting.id) %>

@@ -84,7 +84,7 @@ class MeetingsController < ApplicationController
     end
 
     if users_meeting.save
-      redirect_to @meeting
+      redirect_to @meetiång
     else
       format.html { render :new }
       format.json { render json: @users_meeting.errors, status: :unprocessable_entity }
@@ -109,6 +109,6 @@ class MeetingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
-      params.require(:meeting).permit(:title, :start_datetime, :finished_flg)
+      params.require(:meeting).permit(:title, :start_datetime, :summary, :finished_flg)
     end
 end

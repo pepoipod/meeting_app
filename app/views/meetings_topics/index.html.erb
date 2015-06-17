@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Meetings Topics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Meeting</th>
+      <th>Topic</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @meetings_topics.each do |meetings_topic| %>
+      <tr>
+        <td><%= meetings_topic.meeting_id %></td>
+        <td><%= meetings_topic.topic_id %></td>
+        <td><%= link_to 'Show', meetings_topic %></td>
+        <td><%= link_to 'Edit', edit_meetings_topic_path(meetings_topic) %></td>
+        <td><%= link_to 'Destroy', meetings_topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Meetings topic', new_meetings_topic_path %>

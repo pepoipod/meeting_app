@@ -14,5 +14,5 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:sign_up) << :email
       #  account_updateのときに、emailも許可する
       devise_parameter_sanitizer.for(:account_update) << :email
-    end
+   end
 end
