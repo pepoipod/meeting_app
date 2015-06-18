@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update, :destroy, :toggle]
+  before_action :sign_in_required
 
   # GET /topics
   # GET /topics.json
@@ -82,5 +83,9 @@ class TopicsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def topic_params
       params.require(:topic).permit(:title, :body, :finished_flg, :page_id)
+    end
+
+    def sign_in_required
+      redirect_to new_user_session_path unless user_signed_in?
     end
 end
