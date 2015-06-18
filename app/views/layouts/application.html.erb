@@ -8,7 +8,9 @@
 </head>
 <body>
 	<%= render 'layouts/header' %>
-	<%= render 'layouts/this_week_meetings_list' %>
+	<% if user_signed_in? %>
+		<%= render 'layouts/this_week_meetings_list' %>
+	<% end %>
 	<main>
 		<%= yield %>
 	</main>

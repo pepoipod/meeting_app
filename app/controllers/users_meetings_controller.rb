@@ -1,5 +1,6 @@
 class UsersMeetingsController < ApplicationController
   before_action :set_users_meeting, only: [:show, :edit, :update, :destroy]
+  before_action :sign_in_required
 
   # GET /users_meetings
   # GET /users_meetings.json
@@ -70,5 +71,9 @@ class UsersMeetingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def users_meeting_params
       params.require(:users_meeting).permit(:user_id_id, :meeting_id_id, :attendance_flg)
+    end
+
+    def sign_in_required
+      redirect_to new_user_session_path unless user_signed_in?
     end
 end
