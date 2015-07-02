@@ -31,6 +31,9 @@
         <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td><%= link_to 'Attendance', attendance_meeting_path(meeting), data: { confirm: 'Are you sure?' } %></td>
         <td><%= link_to 'Absence', absence_meeting_path(meeting), data: { confirm: 'Are you sure?' } %></td>
+        <% if DateTime.now > meeting.start_datetime %>
+          <td><span style="color: red; font-weight: bold;">This Meeting is END</span></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
