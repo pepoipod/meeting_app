@@ -13,12 +13,20 @@ Rails.application.routes.draw do
     member do
       post :toggle
     end
+
+    collection do
+      get :show_archived
+    end
   end
 
   resources :meetings do
     member do
       get :attendance
       get :absence
+    end
+
+    collection do
+      get :show_archived
     end
   end
   resources :topics
