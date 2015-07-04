@@ -13,6 +13,10 @@ class TopicsController < ApplicationController
   def show
   end
 
+  def show_archived
+    @topics = Topic.order('created_at desc')
+  end
+
   # GET /topics/new
   def new
     @topic = Topic.new

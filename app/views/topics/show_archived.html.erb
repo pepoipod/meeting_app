@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Open Topics</h1>
+<h1>Archived Topics</h1>
 
 <table>
   <thead>
@@ -15,7 +15,7 @@
   </thead>
 
   <tbody>
-    <% @topics.where(finished_flg: false).each do |topic| %>
+    <% @topics.where(finished_flg: true).each do |topic| %>
     <tr>
       <td><%= "#{topic.title} ##{topic.id}" %></td>
       <td><%= topic.body %></td>
@@ -33,4 +33,4 @@
 <br>
 
 <p><%= link_to 'New Topic', new_topic_path %></p>
-<p><%= link_to 'Archived Topics', show_archived_topics_path %></p>
+<p><%= link_to 'Open Topics', topics_path %></p>

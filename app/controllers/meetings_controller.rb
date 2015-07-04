@@ -14,6 +14,10 @@ class MeetingsController < ApplicationController
     @users_meetings = UsersMeeting.where(meeting_id_id: @meeting.id)
   end
 
+  def show_archived
+    @meetings = Meeting.all
+  end
+
   # GET /meetings/new
   def new
     printf("hoge")
