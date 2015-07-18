@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :categories
   resources :pages
   resources :meetings_topics
   get 'users/index'
