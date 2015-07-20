@@ -1,0 +1,24 @@
+<h1>Editing Page's Category</h1>
+
+<h2>Categories</h2>
+<ul>
+	<% @pages_categories.each do |pages_category| %>
+		<% category = Category.find(pages_category.category_id) %>
+		<li><%= link_to category.name, remove_category_page_path(pages_category) %></li>
+	<% end %>
+</ul>
+
+<h2>Apply categories to this page</h2>
+<ul>
+	<% @categories.each do |category| %>
+		<% @pages_categories.each do |pages_category| %>
+			<% if category == pages_category %>
+				<% break %>
+			<% end %>
+		<% end %>
+		<li><%= link_to category.name, { controller: :pages, action: :add_category, id: @page.id, page_id: @page.id, category_id: category.id } %></li>
+	<% end %>
+</ul>
+
+<%= link_to 'Show', @page %> |
+<%= link_to 'Back', pages_path %>

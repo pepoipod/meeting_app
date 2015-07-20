@@ -89,7 +89,7 @@ class MeetingsController < ApplicationController
     end
 
     if users_meeting.save
-      redirect_to @meetiång
+      redirect_to @meeting
     else
       format.html { render :new }
       format.json { render json: @users_meeting.errors, status: :unprocessable_entity }
