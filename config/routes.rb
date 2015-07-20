@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :pages_categories
   resources :categories
   resources :pages
   resources :meetings_topics
@@ -32,6 +33,14 @@ Rails.application.routes.draw do
     end
   end
   resources :topics
+
+  resources :pages do
+    member do
+      get :edit_category
+      get "add_category/:page_id/:category_id" => :add_category
+      get :remove_category
+    end
+  end
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :sessions => 'users/sessions'

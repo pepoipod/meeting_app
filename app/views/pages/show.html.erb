@@ -15,5 +15,14 @@
   <%= @page.user.username %>
 </p>
 
+<p>
+  <strong>Category:</strong>
+  <ul>
+  	<% @page.category.each do |category| %>
+  		<li><%= category.name %></li>
+  	<% end %>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_page_path(@page) %> |
 <%= link_to 'Back', pages_path %>
