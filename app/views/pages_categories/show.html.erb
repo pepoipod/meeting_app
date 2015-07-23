@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Page:</strong>
+  <%= @pages_category.page %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @pages_category.category %>
+</p>
+
+<%= link_to 'Edit', edit_pages_category_path(@pages_category) %> |
+<%= link_to 'Back', pages_categories_path %>
