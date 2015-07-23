@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :labels
   resources :pages_categories
   resources :categories
   resources :pages
