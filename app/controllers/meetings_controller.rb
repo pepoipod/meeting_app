@@ -42,6 +42,8 @@ class MeetingsController < ApplicationController
         format.json { render json: @meeting.errors, status: :unprocessable_entity }
       end
     end
+
+    create_meetings_topics(@meeting)
   end
 
   # PATCH/PUT /meetings/1
@@ -56,6 +58,8 @@ class MeetingsController < ApplicationController
         format.json { render json: @meeting.errors, status: :unprocessable_entity }
       end
     end
+
+    create_meetings_topics(@meeting)
   end
 
   def attendance
@@ -93,6 +97,50 @@ class MeetingsController < ApplicationController
     else
       format.html { render :new }
       format.json { render json: @users_meeting.errors, status: :unprocessable_entity }
+    end
+  end
+
+  def integer_string?(str)
+    Integer(str)
+    true
+  rescue ArgumentError
+    false
+  end
+
+  def getTopicsFromText(text)
+    topics = [];
+
+    text.each_line do |line|
+      word_arr = line.split
+      word_arr.each do |word|
+        if integer_string?(word.delete("#")) && word.start_with?("#")
+          if Topic.exists?(id: Integer(word.delete("#")))
+            topic = Topic.find(Integer(word.delete("#")))
+            topics << topic
+          end
+        end
+      end
+    end
+    topics
+  end
+
+  def create_meetings_topics(meeting)
+    topics = getTopicsFromText(meeting.summary)
+
+    topics.each do |topic|
+      if meetings_topic = MeetingsTopic.find_by(meeting_id_id: meeting.id, topic_id_id: topic.id)
+        next
+      else
+        meetings_topic = MeetingsTopic.new(
+          meeting_id_id: meeting.id,
+          topic_id_id: topic.id
+        )
+
+        if !meetings_topic.save
+          format.html { render :new }
+          format.json { render json: @meetings_topic.errors, status: :unprocessable_entity }
+        end
+      end
     end
   end
 
