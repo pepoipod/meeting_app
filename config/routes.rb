@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :topics_labels
   resources :labels
   resources :pages_categories
   resources :categories
@@ -15,6 +16,10 @@ Rails.application.routes.draw do
 
   resources :topics do
     member do
+      get :edit_label
+      get "add_label/:topic_id/:label_id" => :add_label
+      get :remove_label
+
       post :toggle
     end
 

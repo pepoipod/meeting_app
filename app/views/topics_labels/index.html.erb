@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Topics Labels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Topic</th>
+      <th>Label</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @topics_labels.each do |topics_label| %>
+      <tr>
+        <td><%= topics_label.topic %></td>
+        <td><%= topics_label.label %></td>
+        <td><%= link_to 'Show', topics_label %></td>
+        <td><%= link_to 'Edit', edit_topics_label_path(topics_label) %></td>
+        <td><%= link_to 'Destroy', topics_label, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Topics label', new_topics_label_path %>
