@@ -1,0 +1,26 @@
+<h1>Editing Topic's Label</h1>
+
+<h2>Labels</h2>
+<ul>
+	<% @topics_labels.each do |topics_label| %>
+		<% label = Label.find(topics_label.label_id) %>
+		<li><%= link_to label.name, remove_label_topic_path(topics_label) %></li>
+	<% end %>
+</ul>
+
+<h2>Apply labels to this page</h2>
+<ul>
+	<% @labels.each do |label| %>
+		<% catch (:out) do %>
+			<% @topics_labels.each do |topics_label| %>
+				<% if label.id == topics_label.label_id %>
+					<% throw :out %>
+				<% end %>
+			<% end %>
+			<li><%= link_to label.name, { controller: :topics, action: :add_label, id: @topic.id, topic_id: @topic.id, label_id: label.id } %></li>
+		<% end %>
+	<% end %>
+</ul>
+
+<%= link_to 'Show', @topic %> |
+<%= link_to 'Back', topics_path %>

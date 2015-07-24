@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
-  before_action :set_topic, only: [:show, :edit, :update, :destroy, :toggle]
+  before_action :set_topic, only: [:show, :edit, :edit_label, :update, :destroy, :toggle]
+  before_action :get_labels, only: [:edit_label]
   before_action :sign_in_required
 
   # GET /topics
@@ -24,6 +25,35 @@ class TopicsController < ApplicationController
 
   # GET /topics/1/edit
   def edit
+  end
+
+  def edit_label
+    @topics_labels = TopicsLabel.where(topic_id: @topic.id)
+  end
+
+  def add_label
+    @topic = Topic.find(params[:topic_id])
+    topics_label = TopicsLabel.new(
+      topic_id: params[:topic_id],
+      label_id: params[:label_id]
+    )
+
+    if topics_label.save
+      redirect_to @topic
+    else
+      format.html { render :new }
+      format.json { render json: topics_label.errors, status: :unprocessable_entity }
+    end
+  end
+
+  def remove_label
+    @topics_label = TopicsLabel.find(params[:id])
+    @topics_label.destroy
+
+    respond_to do |format|
+      format.html { redirect_to pages_url, notice: 'Page was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   # POST /topics
@@ -82,6 +112,10 @@ class TopicsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_topic
       @topic = Topic.find(params[:id])
+    end
+
+    def get_labels
+      @labels = Label.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -11,12 +11,14 @@
 <h2>Apply categories to this page</h2>
 <ul>
 	<% @categories.each do |category| %>
-		<% @pages_categories.each do |pages_category| %>
-			<% if category == pages_category %>
-				<% break %>
+		<% catch (:out) do %>
+			<% @pages_categories.each do |pages_category| %>
+				<% if category.id == pages_category.category_id %>
+					<% throw :out %>
+				<% end %>
 			<% end %>
+			<li><%= link_to category.name, { controller: :pages, action: :add_category, id: @page.id, page_id: @page.id, category_id: category.id } %></li>
 		<% end %>
-		<li><%= link_to category.name, { controller: :pages, action: :add_category, id: @page.id, page_id: @page.id, category_id: category.id } %></li>
 	<% end %>
 </ul>
 
