@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  before_action :set_topic, only: [:show, :edit, :edit_label, :update, :destroy, :toggle]
+  before_action :set_topic, only: [:show, :edit, :edit_label, :add_comment, :update, :destroy, :toggle]
   before_action :get_labels, only: [:edit_label]
   before_action :sign_in_required
 
@@ -54,6 +54,10 @@ class TopicsController < ApplicationController
       format.html { redirect_to pages_url, notice: 'Page was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def add_comment
+    @topic_comment = @topic.comments.create body: params[:body], user_id: current_user.id
   end
 
   # POST /topics

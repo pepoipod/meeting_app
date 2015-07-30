@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :comments
   resources :topics_labels
   resources :labels
   resources :pages_categories
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
       get :remove_label
 
       post :toggle
+      resources :comments
     end
 
     collection do
@@ -39,6 +41,7 @@ Rails.application.routes.draw do
     end
   end
   resources :topics
+  resources :comments
 
   resources :pages do
     member do
