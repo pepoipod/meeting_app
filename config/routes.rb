@@ -39,6 +39,8 @@ Rails.application.routes.draw do
     collection do
       get :show_archived
     end
+
+    resources :comments
   end
   resources :topics
   resources :comments
