@@ -62,6 +62,50 @@
     <%= link_to 'Absence', absence_meeting_path(@meeting), data: { confirm: 'Are you sure?' } %>
 </div>
 
+<p>
+  <strong>Comments:</strong>
+  <ul>
+    <% @meeting.comments.each do |comment| %>
+      <li>
+        <p>Body: <%= comment.body %></p>
+        <p>User: <%= User.find(comment.user_id).username %></p>
+      </li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
+  <strong>New Comment:</strong>
+  <% @comment = @meeting.comments.new %>
+  <%= form_for(@comment) do |f| %>
+    <% if @comment.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+        <ul>
+        <% @comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+    <div class="field">
+      <%= f.label :body %><br>
+      <%= f.text_area :body %>
+    </div>
+
+    <%= f.hidden_field :commentable_id, value: @meeting.id %>
+    <%= f.hidden_field :commentable_type, value: "Meeting" %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
 <%= link_to 'Back', meetings_path %>
 
