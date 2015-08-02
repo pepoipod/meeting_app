@@ -10,7 +10,8 @@
       <th>Summary</th>
       <th>Finished flg</th>
       <th>Attendance flg</th>
-      <th colspan="5"></th>
+      <th>Comments</th>
+      <th colspan="6"></th>
     </tr>
   </thead>
 
@@ -26,6 +27,7 @@
             <%= users_meeting.attendance_flg %>
           <% end %>
         </td>
+        <td><%= meeting.comments.count %></td>
         <td><%= link_to 'Show', meeting %></td>
         <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
         <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
